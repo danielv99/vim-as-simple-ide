@@ -1,16 +1,16 @@
 #!/bin/sh
 
-GIT=`whereis git`
-CURL=`whereis curl`
-WGET=`whereis wget`
+GIT="/usr/bin/git"
+CURL="/usr/bin/curl"
+WGET="/usr/bin/wget"
 
-if [ -z $GIT ]; then
+if [ ! -e $GIT ]; then
     echo "Unable to find git."
     exit 1
-elif [ -z $CURL ]; then
+elif [ ! -e $CURL ]; then
     echo "Unable to find curl."
     exit 1
-elif [ -z $WGET ]; then
+elif [ ! -e $WGET ]; then
     echo "Unable to file wget."
     exit 1
 fi
@@ -34,8 +34,14 @@ $GIT clone git://github.com/airblade/vim-gitgutter.git
 cd ~/.vim/bundle
 $GIT clone https://github.com/kien/ctrlp.vim.git
 
-cd ~/.vim/bundle
-$GIT clone git://github.com/davidhalter/jedi-vim.git
+echo "Install Jedi [no]?"
+read -p "Install Jedi [no]? " installjedi
+if [ ! -z $installjedi ]; then
+    if [ ${installjedi} == "yes" ]; then
+        cd ~/.vim/bundle
+        $GIT clone git://github.com/davidhalter/jedi-vim.git
+    fi
+fi
 
 cat > ~/.vimrc <<EOM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -88,6 +94,7 @@ au InsertLeave * match ExtraWhitespace /\s\+$/
 " wget -O wombat256mod.vim http://www.vim.org/scripts/download_script.php?src_id=13400
 set t_Co=256
 color wombat256mod
+autocmd ColorScheme * highlight Normal ctermbg=none
 
 " Enable syntax highlighting
 " You need to reload this file for the change to apply
