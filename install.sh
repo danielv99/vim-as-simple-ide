@@ -138,6 +138,7 @@ let g:airline_powerline_fonts = 1
 " git clone git://github.com/airblade/vim-gitgutter.git
 let g:gitgutter_sign_column_always = 0
 let g:gitgutter_realtime = 1
+highlight clear SignColumn
 
 " Settings for ctrlp
 " cd ~/.vim/bundle
