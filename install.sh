@@ -34,14 +34,11 @@ $GIT clone git://github.com/airblade/vim-gitgutter.git
 cd ~/.vim/bundle
 $GIT clone https://github.com/kien/ctrlp.vim.git
 
-echo "Install Jedi [no]?"
-read -p "Install Jedi [no]? " installjedi
-if [ ! -z $installjedi ]; then
-    if [ ${installjedi} == "yes" ]; then
-        cd ~/.vim/bundle
-        $GIT clone git://github.com/davidhalter/jedi-vim.git
-    fi
-fi
+cd ~/.vim/bundle
+$GIT clone git://github.com/davidhalter/jedi-vim.git
+
+cd ~/.vim/bundle
+$GIT clone git://github.com/tpope/vim-fugitive.git
 
 cat > ~/.vimrc <<EOM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
